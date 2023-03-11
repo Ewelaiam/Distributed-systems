@@ -12,14 +12,12 @@ public class ClientThread extends Thread{
     private final List<Socket> clients;
     private final Socket socket;
     private final BufferedReader bufferedReader;
-    private final String name;
 
     public ClientThread(Socket socket, List<Socket> clients) throws IOException {
         clients.add(socket);
         this.socket = socket;
         this.clients = clients;
         this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        this.name = socket.getInetAddress().getHostName();
     }
 
     @Override
@@ -37,7 +35,7 @@ public class ClientThread extends Thread{
         } catch (SocketException e) {
             System.out.println("!CONNECTION WAS CLOSED!");
         } catch (IOException e) {
-            System.out.println("MESSAGE RECEIVING ERROR: " + name);
+            System.out.println("MESSAGE RECEIVING ERROR: " + socket.getInetAddress().getHostName());
             e.printStackTrace();
         } finally {
             clients.remove(socket);

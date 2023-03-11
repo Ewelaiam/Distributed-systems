@@ -8,20 +8,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import static pl.edu.agh.cs.ds.ConnectionInfo.HOSTNAME;
+import static pl.edu.agh.cs.ds.ConnectionInfo.PORT;
 
 public class UDPHandler extends Thread{
-    private final int port;
     private final List<Socket> clients;
 
-    public UDPHandler(int port, List<Socket> clients) {
-        this.port = port;
+    public UDPHandler(List<Socket> clients) {
         this.clients = clients;
     }
 
     @Override
     public synchronized void run() {
         super.start();
-        try (DatagramSocket socket = new DatagramSocket(port)) {
+        try (DatagramSocket socket = new DatagramSocket(PORT)) {
             byte[] receiveBuffer = new byte[1024];
 
             while (true) {

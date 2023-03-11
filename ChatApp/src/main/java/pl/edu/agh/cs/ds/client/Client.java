@@ -11,8 +11,6 @@ import static pl.edu.agh.cs.ds.ConnectionInfo.*;
 import static pl.edu.agh.cs.ds.client.AsciiArtCollection.asciiArt;
 
 public class Client {
-
-//    private static boolean isRunning = false;
     private static final Scanner scanner = new Scanner(System.in);
     private static String name = "noName";
 
@@ -21,8 +19,8 @@ public class Client {
             try {
                 String msg = scanner.nextLine();
                 switch (msg) {
-                    case "U" -> sendAsciiArtMessage(datagramSocket, name, HOSTNAME, PORT, "UDP");
-                    case "M" -> sendAsciiArtMessage(datagramSocket, name, MULTICAST_ADDRESS, MULTICAST_PORT, "Multicast");
+                    case "U" -> sendAsciiArtMessage(datagramSocket, name, InetAddress.getByName(HOSTNAME), PORT, "UDP");
+                    case "M" -> sendAsciiArtMessage(datagramSocket, name, InetAddress.getByName(MULTICAST_ADDRESS), MULTICAST_PORT, "Multicast");
                     default -> serverOutput.println("\n[TCP]\n@" + name + ": " + msg + "\n" + "> ");
                 }
 
@@ -36,9 +34,8 @@ public class Client {
         }
     }
 
-    private static void sendAsciiArtMessage(DatagramSocket datagramSocket, String name, String host, int destinationPort, String type) throws IOException {
+    private void sendAsciiArtMessage(DatagramSocket datagramSocket, String name, InetAddress address, int destinationPort, String type) throws IOException {
         byte[] sendBuffer = ("[" + type + "]\n@" + name + ":" + "\n" + asciiArt).getBytes();
-        InetAddress address = InetAddress.getByName(host);
         DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, address, destinationPort);
         datagramSocket.send(sendPacket);
     }

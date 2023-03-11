@@ -17,7 +17,7 @@ public class Server {
     private final ExecutorService executorService = Executors.newFixedThreadPool(50);
 
     private void connectClients(ServerSocket serverTcpSocket) {
-        executorService.submit(new UDPHandler(PORT, clients));
+        executorService.submit(new UDPHandler(clients));
 
         while (!serverTcpSocket.isClosed()) {
             try {

@@ -22,7 +22,8 @@ public class UDPMulticastListener extends Thread{
         byte[] receiveBuffer = new byte[1024];
         while (true) {
             try (MulticastSocket socket = new MulticastSocket(MULTICAST_PORT)) {
-                socket.joinGroup(InetAddress.getByName(MULTICAST_ADDRESS));
+                InetAddress group = InetAddress.getByName(MULTICAST_ADDRESS);
+                socket.joinGroup(group);
                 Arrays.fill(receiveBuffer, (byte) 0);
                 DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
                 socket.receive(receivePacket);
