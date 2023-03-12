@@ -34,9 +34,9 @@ public class Client {
         }
     }
 
-    private void sendAsciiArtMessage(DatagramSocket datagramSocket, String name, InetAddress address, int destinationPort, String type) throws IOException {
-        byte[] sendBuffer = ("[" + type + "]\n@" + name + ":" + "\n" + asciiArt).getBytes();
-        DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, address, destinationPort);
+    private void sendAsciiArtMessage(DatagramSocket datagramSocket, String name, InetAddress group, int destinationPort, String type) throws IOException {
+        byte[] sendBuffer = ("[" + type + "]\n@" + name + ":" + "\n" + asciiArt + "\n>").getBytes();
+        DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, group, destinationPort);
         datagramSocket.send(sendPacket);
     }
 
