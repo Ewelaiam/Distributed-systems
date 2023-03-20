@@ -86,6 +86,7 @@ def handle_form(request: Request,
     for_adult = 0
     release_this_year = 0
     with_video = 0
+    is_original_en = 0
 
     url_title = []
     url_similar = []
@@ -99,6 +100,8 @@ def handle_form(request: Request,
             release_this_year += 1
         if film['video']:
             with_video += 1
+        if film['original_language'] == "en":
+            is_original_en += 1
 
     asyncio.run(get_urls_info(url_title, url_similar))
     all_books = get_books()
@@ -114,12 +117,13 @@ def handle_form(request: Request,
                                                       "films_no": len(top_films),
                                                       "flag": language,
                                                       "books": all_books,
-                                                      "vote_per_film": average,
+                                                      "vote_per_film": round(average, 2),
                                                       "for_adult": for_adult,
                                                       "similar": similar,
                                                       "best_film": best_film,
                                                       "release_this_year": release_this_year,
-                                                      "with_video": with_video
+                                                      "with_video": with_video,
+                                                      "en_films": f"{round(is_original_en * 100 / len(top_films), 2)}%"
                                                       })
 
 @app.exception_handler(RequestValidationError)
