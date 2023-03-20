@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top films</title>
+    <style>
+        .container{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top {{ films_no }} {{ genre }} films </h1>
+    <p>
+        {% set cnt = [0] %}
+        {% for film in films %}
+            {% if cnt.append(cnt.pop() + 1) %}{% endif %}
+            <div class="container">
+                <div>
+                    <h2> Top {{ cnt[0] }}</h2>
+                    <h3> {{ film.title }}</h3>
+                    <h5> {{ film.original_title }}</h5>
+
+                    <p>{{ film.overview }}</p>
+                    <p>Release date: {{ film.release_date }}</p>
+                    <p>Books: {{ books[cnt[0] - 1] }}</p>
+                    <p>Similar films: {{ similar[cnt[0] - 1] }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+        <h2>All</h2>
+        <p>Number of votes per film: {{ vote_per_film }}</p>
+        <p>For adult: {{ for_adult }}</p>
+        <p>Release this year: {{ release_this_year }}</p>
+        <p>With video: {{ with_video }}</p>
+
+
+    </p>
+    <h2>Best film: {{ best_film }}</h2>
+
+
+</body>
+</html>
