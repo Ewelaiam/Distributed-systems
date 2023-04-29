@@ -17,11 +17,14 @@ package smarthome;
 
 public interface Radio extends Audio
 {
-    void turnOnRadioMode(com.zeroc.Ice.Current current);
+    void turnOnRadioMode(com.zeroc.Ice.Current current)
+        throws Error;
 
-    void turnOffRadioMode(com.zeroc.Ice.Current current);
+    void turnOffRadioMode(com.zeroc.Ice.Current current)
+        throws Error;
 
-    void changeStation(com.zeroc.Ice.Current current);
+    void changeStation(com.zeroc.Ice.Current current)
+        throws Error;
 
     /** @hidden */
     static final String[] _iceIds =
@@ -54,8 +57,10 @@ public interface Radio extends Audio
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_turnOnRadioMode(Radio obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         inS.readEmptyParams();
@@ -69,8 +74,10 @@ public interface Radio extends Audio
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_turnOffRadioMode(Radio obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         inS.readEmptyParams();
@@ -84,8 +91,10 @@ public interface Radio extends Audio
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_changeStation(Radio obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         inS.readEmptyParams();

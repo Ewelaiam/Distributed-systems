@@ -33,14 +33,14 @@ module smarthome {
     };
 
     interface Speaker extends Audio {
-        void connectBluetooth() throws Error;
-        void disconnectBluetooth() throws Error;
+        void connectBluetooth();
+        void disconnectBluetooth();
     };
 
-    interface Radio extends Audio {
-        void turnOnRadioMode() throws Error;
-        void turnOffRadioMode() throws Error;
-        void changeStation() throws Error;
+    interface Radio extends Audio{
+        void turnOnRadioMode();
+        void turnOffRadioMode();
+        void changeStation();
     };
 
     struct Location {
@@ -56,8 +56,8 @@ module smarthome {
     interface WeatherStation {
         Specs getSpecs();
         Location getLocation();
-        double getAverageWeeklyInsideTemperature() throws Error;
-        double getAverageWeeklyOutsideTemperature() throws Error;
+        double getAverageWeeklyInsideTemperature( );
+        double getAverageWeeklyOutsideTemperature();
         idempotent double getInsideTemperature();
         idempotent double getOutsideTemperature();
         idempotent double getPressure();

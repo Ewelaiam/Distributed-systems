@@ -18,13 +18,26 @@ package smarthome;
 public interface SpeakerPrx extends AudioPrx
 {
     default void connectBluetooth()
+        throws Error
     {
         connectBluetooth(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void connectBluetooth(java.util.Map<String, String> context)
+        throws Error
     {
-        _iceI_connectBluetoothAsync(context, true).waitForResponse();
+        try
+        {
+            _iceI_connectBluetoothAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(Error ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Void> connectBluetoothAsync()
@@ -45,19 +58,38 @@ public interface SpeakerPrx extends AudioPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_connectBluetoothAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "connectBluetooth", null, sync, null);
-        f.invoke(false, context, null, null, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "connectBluetooth", null, sync, _iceE_connectBluetooth);
+        f.invoke(true, context, null, null, null);
         return f;
     }
 
+    /** @hidden */
+    static final Class<?>[] _iceE_connectBluetooth =
+    {
+        Error.class
+    };
+
     default void disconnectBluetooth()
+        throws Error
     {
         disconnectBluetooth(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void disconnectBluetooth(java.util.Map<String, String> context)
+        throws Error
     {
-        _iceI_disconnectBluetoothAsync(context, true).waitForResponse();
+        try
+        {
+            _iceI_disconnectBluetoothAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(Error ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Void> disconnectBluetoothAsync()
@@ -78,10 +110,16 @@ public interface SpeakerPrx extends AudioPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_disconnectBluetoothAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "disconnectBluetooth", null, sync, null);
-        f.invoke(false, context, null, null, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "disconnectBluetooth", null, sync, _iceE_disconnectBluetooth);
+        f.invoke(true, context, null, null, null);
         return f;
     }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_disconnectBluetooth =
+    {
+        Error.class
+    };
 
     /**
      * Contacts the remote server to verify that the object implements this type.

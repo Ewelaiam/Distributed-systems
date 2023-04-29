@@ -92,13 +92,26 @@ public interface WeatherStationPrx extends com.zeroc.Ice.ObjectPrx
     }
 
     default double getAverageWeeklyInsideTemperature()
+        throws Error
     {
         return getAverageWeeklyInsideTemperature(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default double getAverageWeeklyInsideTemperature(java.util.Map<String, String> context)
+        throws Error
     {
-        return _iceI_getAverageWeeklyInsideTemperatureAsync(context, true).waitForResponse();
+        try
+        {
+            return _iceI_getAverageWeeklyInsideTemperatureAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(Error ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<java.lang.Double> getAverageWeeklyInsideTemperatureAsync()
@@ -119,7 +132,7 @@ public interface WeatherStationPrx extends com.zeroc.Ice.ObjectPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> _iceI_getAverageWeeklyInsideTemperatureAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAverageWeeklyInsideTemperature", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAverageWeeklyInsideTemperature", null, sync, _iceE_getAverageWeeklyInsideTemperature);
         f.invoke(true, context, null, null, istr -> {
                      double ret;
                      ret = istr.readDouble();
@@ -128,14 +141,33 @@ public interface WeatherStationPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
+    /** @hidden */
+    static final Class<?>[] _iceE_getAverageWeeklyInsideTemperature =
+    {
+        Error.class
+    };
+
     default double getAverageWeeklyOutsideTemperature()
+        throws Error
     {
         return getAverageWeeklyOutsideTemperature(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default double getAverageWeeklyOutsideTemperature(java.util.Map<String, String> context)
+        throws Error
     {
-        return _iceI_getAverageWeeklyOutsideTemperatureAsync(context, true).waitForResponse();
+        try
+        {
+            return _iceI_getAverageWeeklyOutsideTemperatureAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(Error ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<java.lang.Double> getAverageWeeklyOutsideTemperatureAsync()
@@ -156,7 +188,7 @@ public interface WeatherStationPrx extends com.zeroc.Ice.ObjectPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> _iceI_getAverageWeeklyOutsideTemperatureAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAverageWeeklyOutsideTemperature", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAverageWeeklyOutsideTemperature", null, sync, _iceE_getAverageWeeklyOutsideTemperature);
         f.invoke(true, context, null, null, istr -> {
                      double ret;
                      ret = istr.readDouble();
@@ -164,6 +196,12 @@ public interface WeatherStationPrx extends com.zeroc.Ice.ObjectPrx
                  });
         return f;
     }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_getAverageWeeklyOutsideTemperature =
+    {
+        Error.class
+    };
 
     default double getInsideTemperature()
     {

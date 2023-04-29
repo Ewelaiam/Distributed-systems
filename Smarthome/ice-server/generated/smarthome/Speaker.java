@@ -17,9 +17,11 @@ package smarthome;
 
 public interface Speaker extends Audio
 {
-    void connectBluetooth(com.zeroc.Ice.Current current);
+    void connectBluetooth(com.zeroc.Ice.Current current)
+        throws Error;
 
-    void disconnectBluetooth(com.zeroc.Ice.Current current);
+    void disconnectBluetooth(com.zeroc.Ice.Current current)
+        throws Error;
 
     /** @hidden */
     static final String[] _iceIds =
@@ -52,8 +54,10 @@ public interface Speaker extends Audio
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_connectBluetooth(Speaker obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         inS.readEmptyParams();
@@ -67,8 +71,10 @@ public interface Speaker extends Audio
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_disconnectBluetooth(Speaker obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         inS.readEmptyParams();

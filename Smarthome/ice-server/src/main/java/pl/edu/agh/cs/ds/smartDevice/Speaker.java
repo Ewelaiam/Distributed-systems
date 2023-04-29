@@ -2,6 +2,7 @@ package pl.edu.agh.cs.ds.smartDevice;
 
 import com.zeroc.Ice.Current;
 import lombok.extern.slf4j.Slf4j;
+import smarthome.Error;
 import smarthome.Specs;
 import smarthome.Type;
 
@@ -17,14 +18,14 @@ public class Speaker extends Audio implements smarthome.Speaker{
     }
 
     @Override
-    public void connectBluetooth(Current current) {
+    public void connectBluetooth(Current current) throws Error {
         log.info("Speaker: connectBluetooth");
         assertAudioState();
         bluetoothState = true;
     }
 
     @Override
-    public void disconnectBluetooth(Current current) {
+    public void disconnectBluetooth(Current current) throws Error {
         log.info("Speaker: disconnectBluetooth");
         assertAudioState();
         bluetoothState = false;
@@ -75,7 +76,7 @@ public class Speaker extends Audio implements smarthome.Speaker{
 
     private void assertBluetoothState() throws Error {
         if (!bluetoothState) {
-            throw new Error("Bluetooth not connected");
+            throw new Error(8,"Bluetooth not connected");
         }
     }
 }

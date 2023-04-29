@@ -2,6 +2,7 @@ package pl.edu.agh.cs.ds.smartDevice;
 
 import com.zeroc.Ice.Current;
 import lombok.extern.slf4j.Slf4j;
+import smarthome.Error;
 import smarthome.maxVolume;
 import smarthome.minVolume;
 
@@ -26,7 +27,7 @@ public abstract class Audio implements smarthome.Audio, minVolume, maxVolume {
         if (volumeState < maxVolume.value) {
             volumeState++;
         } else {
-            throw new Error("Max Volume reached");
+            throw new Error(4, "Max Volume reached");
         }
     }
 
@@ -37,7 +38,7 @@ public abstract class Audio implements smarthome.Audio, minVolume, maxVolume {
         if (volumeState > minVolume.value) {
             volumeState--;
         } else {
-            throw new Error("Min Volume reached");
+            throw new Error(3, "Min Volume reached");
         }
     }
 
@@ -75,13 +76,13 @@ public abstract class Audio implements smarthome.Audio, minVolume, maxVolume {
         if (trackState) {
             return "Track name";
         } else {
-            throw new Error("Track not started");
+            throw new Error(2, "Track not started");
         }
     }
 
     protected void assertAudioState() throws Error {
         if (!audioState) {
-            throw new Error("Device not turned on");
+            throw new Error(1, "Device not turned on");
         }
     }
 

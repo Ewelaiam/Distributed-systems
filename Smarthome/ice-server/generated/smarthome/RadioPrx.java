@@ -18,13 +18,26 @@ package smarthome;
 public interface RadioPrx extends AudioPrx
 {
     default void turnOnRadioMode()
+        throws Error
     {
         turnOnRadioMode(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void turnOnRadioMode(java.util.Map<String, String> context)
+        throws Error
     {
-        _iceI_turnOnRadioModeAsync(context, true).waitForResponse();
+        try
+        {
+            _iceI_turnOnRadioModeAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(Error ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Void> turnOnRadioModeAsync()
@@ -45,19 +58,38 @@ public interface RadioPrx extends AudioPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_turnOnRadioModeAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "turnOnRadioMode", null, sync, null);
-        f.invoke(false, context, null, null, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "turnOnRadioMode", null, sync, _iceE_turnOnRadioMode);
+        f.invoke(true, context, null, null, null);
         return f;
     }
 
+    /** @hidden */
+    static final Class<?>[] _iceE_turnOnRadioMode =
+    {
+        Error.class
+    };
+
     default void turnOffRadioMode()
+        throws Error
     {
         turnOffRadioMode(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void turnOffRadioMode(java.util.Map<String, String> context)
+        throws Error
     {
-        _iceI_turnOffRadioModeAsync(context, true).waitForResponse();
+        try
+        {
+            _iceI_turnOffRadioModeAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(Error ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Void> turnOffRadioModeAsync()
@@ -78,19 +110,38 @@ public interface RadioPrx extends AudioPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_turnOffRadioModeAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "turnOffRadioMode", null, sync, null);
-        f.invoke(false, context, null, null, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "turnOffRadioMode", null, sync, _iceE_turnOffRadioMode);
+        f.invoke(true, context, null, null, null);
         return f;
     }
 
+    /** @hidden */
+    static final Class<?>[] _iceE_turnOffRadioMode =
+    {
+        Error.class
+    };
+
     default void changeStation()
+        throws Error
     {
         changeStation(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void changeStation(java.util.Map<String, String> context)
+        throws Error
     {
-        _iceI_changeStationAsync(context, true).waitForResponse();
+        try
+        {
+            _iceI_changeStationAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(Error ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Void> changeStationAsync()
@@ -111,10 +162,16 @@ public interface RadioPrx extends AudioPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_changeStationAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "changeStation", null, sync, null);
-        f.invoke(false, context, null, null, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "changeStation", null, sync, _iceE_changeStation);
+        f.invoke(true, context, null, null, null);
         return f;
     }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_changeStation =
+    {
+        Error.class
+    };
 
     /**
      * Contacts the remote server to verify that the object implements this type.

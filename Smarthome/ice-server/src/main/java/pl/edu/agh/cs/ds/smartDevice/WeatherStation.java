@@ -2,6 +2,7 @@ package pl.edu.agh.cs.ds.smartDevice;
 
 import com.zeroc.Ice.Current;
 import lombok.extern.slf4j.Slf4j;
+import smarthome.Error;
 import smarthome.Location;
 import smarthome.Specs;
 
@@ -28,9 +29,9 @@ public class WeatherStation implements smarthome.WeatherStation{
     }
 
     @Override
-    public double getAverageWeeklyInsideTemperature(Current current) {
+    public double getAverageWeeklyInsideTemperature(Current current) throws Error {
         if (weeklyInsideTemperatures.length == 0) {
-            throw new Error("No temperatures available");
+            throw new Error(10,"No temperatures available");
         }
         double sumOfTemperatures = 0;
         for (double weeklyInsideTemperature : weeklyInsideTemperatures) {
@@ -40,9 +41,9 @@ public class WeatherStation implements smarthome.WeatherStation{
     }
 
     @Override
-    public double getAverageWeeklyOutsideTemperature(Current current) {
+    public double getAverageWeeklyOutsideTemperature(Current current) throws Error {
         if (weeklyOutsideTemperatures.length == 0) {
-            throw new Error("No temperatures available");
+            throw new Error(9, "No temperatures available");
         }
         double sumOfTemperatures = 0;
         for (double weeklyOutsideTemperature : weeklyOutsideTemperatures) {

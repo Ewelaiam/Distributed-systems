@@ -2,6 +2,7 @@ package pl.edu.agh.cs.ds.smartDevice;
 
 import com.zeroc.Ice.Current;
 import lombok.extern.slf4j.Slf4j;
+import smarthome.Error;
 import smarthome.Specs;
 import smarthome.Type;
 
@@ -17,7 +18,7 @@ public class Radio extends Audio implements smarthome.Radio {
     public void startTrack(Current current) throws Error {
         log.info("Radio: startTrack");
         if (radioState) {
-            throw new Error("Radio mode is turned on");
+            throw new Error(7, "Radio mode is turned on");
         }
         super.startTrack(current);
     }
@@ -28,24 +29,22 @@ public class Radio extends Audio implements smarthome.Radio {
     }
 
     @Override
-    public void turnOnRadioMode(Current current) {
+    public void turnOnRadioMode(Current current) throws Error {
         log.info("Radio: turnOnRadioMode");
         assertAudioState();
-        if (trackState) {
-            throw new Error("Track mode is turned on");
-        }
+        assertTrackState();
         radioState = true;
     }
 
     @Override
-    public void turnOffRadioMode(Current current) {
+    public void turnOffRadioMode(Current current) throws Error {
         log.info("Radio: turnOffRadioMode");
         assertAudioState();
         radioState = false;
     }
 
     @Override
-    public void changeStation(Current current) {
+    public void changeStation(Current current) throws Error {
         log.info("Radio: changeStation");
         assertAudioState();
         assertRadioState();
@@ -58,7 +57,13 @@ public class Radio extends Audio implements smarthome.Radio {
 
     private void assertRadioState() throws Error {
         if (!radioState) {
-            throw new Error("Radio mode not turned on");
+            throw new Error(5, "Radio mode not turned on");
+        }
+    }
+
+    private void assertTrackState() throws Error {
+        if (trackState) {
+            throw new Error(6, "Track mode is turned on");
         }
     }
 }
