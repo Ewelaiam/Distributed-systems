@@ -1,0 +1,14 @@
+version: "3.10"
+services:
+  homework-1:
+    build: ./
+    command: python3 ./homework-1.py
+  homework-2:
+    build: ./
+    command: python3 ./homework-2.py
+  homework-3:
+    build: ./
+    command: sh -c "ray start --head && python3 ./homework-3.py"
+  homework-3b:
+    build: ./
+    command: sh -c "ray start --head && python3 ./homework-3b.py"
