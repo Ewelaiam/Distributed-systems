@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.grpc";
+option java_outer_classname = "PetrolStationHistoryDataProto";
+
+package petrolStationHistoryData;
+
+
+
+message PetrolStationHistoryDataStatisticsRequest {
+
+  enum OperationType {
+    AVG = 0;
+    MIN = 1;
+    MAX = 2;
+    MIN_SEQ = 3;
+    MAX_SEQ = 4;
+    DIFF = 5;
+  }
+
+  message Operation {
+    OperationType operationType = 1;
+    repeated double arg = 2;
+  }
+
+  repeated Operation operations = 1;
+
+}
+
+message PetrolStationHistoryDataStatisticsResponse {
+  repeated double stats = 1;
+}
+
+message TheCostOfTravelCalculationRequest {
+  double distance = 1;
+  double mileage = 2;
+  double price = 3;
+  int32 people = 4;
+}
+
+message TheCostOfTravelCalculationResponse {
+  double cost = 1;
+}
+
+service PetrolStationHistoryData {
+  rpc Statistics (PetrolStationHistoryDataStatisticsRequest) returns (PetrolStationHistoryDataStatisticsResponse) {}
+  rpc Calculator (TheCostOfTravelCalculationRequest) returns (TheCostOfTravelCalculationResponse) {}
+}

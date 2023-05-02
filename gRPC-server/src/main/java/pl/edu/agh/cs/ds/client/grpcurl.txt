@@ -1,0 +1,18 @@
+help
+    grpcurl -help
+
+send an empty request body
+    grpcurl -plaintext localhost:50048 petrolStationHistoryData.PetrolStationHistoryData/Calculator
+
+list available services
+    grpcurl -plaintext localhost:50048 list
+
+list available service methods
+    grpcurl -plaintext localhost:50048 list petrolStationHistoryData.PetrolStationHistoryData
+
+describe the service
+    grpcurl -plaintext localhost:50048 describe petrolStationHistoryData.PetrolStationHistoryData
+
+execute method
+    grpcurl -plaintext -d '{"distance": 142, "mileage": 6.7, "price": 5.78, "people": 2}' localhost:50048 petrolStationHistoryData.PetrolStationHistoryData/Calculator
+
