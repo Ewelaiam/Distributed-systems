@@ -1,11 +1,10 @@
 from enum import Enum
-import sys, Ice
-from logging import info
-from typing import List
+
+import Ice
 
 import smarthome
-from smarthome import SpeakerPrx
 from smarthome import RadioPrx
+from smarthome import SpeakerPrx
 from smarthome import WeatherStationPrx
 
 
