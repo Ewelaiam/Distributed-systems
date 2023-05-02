@@ -84,6 +84,7 @@ if __name__ == '__main__':
     desc_pool = DescriptorPool(reflection_db)
 
     action = run_program()
+
     if action == 'X':
         statistics()
         trip_calculator()

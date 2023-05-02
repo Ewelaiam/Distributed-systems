@@ -1,0 +1,5 @@
+Przydatność:
+
+* zezwalanie aplikacjom na wysyłanie i odbieranie żądań jako zakodowanych sekwencji bajtów zamiast statycznie wpisywanych argumentów.
+* pozwala pośrednikom, np. Glacier2 i IceStorm w Ice, nie znać typów Slice używanych przez nadawców i odbiorców
+* integracja języków skryptowych
