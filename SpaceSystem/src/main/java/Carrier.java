@@ -43,7 +43,7 @@ public class Carrier {
             else {
                 String response = "@From carrier: " + carrierID
                         + "\t\t@With orderId: " + split[3]
-                        + "\t\t@And info: " + "finished service";
+                        + "\t\t@And info: " + "service is finished";
 
 
                 String senderKey = KeyConstant.AGENCY_KEY + split[1];

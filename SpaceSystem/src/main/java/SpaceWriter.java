@@ -11,7 +11,6 @@ public class SpaceWriter {
     private String key;
     private final String EXCHANGE_NAME;
 
-    // queue writer
     public SpaceWriter(String key) throws IOException, TimeoutException {
         EXCHANGE_NAME = "";
         this.key = key;
@@ -19,7 +18,6 @@ public class SpaceWriter {
         channel.queueDeclare(this.key, false, false, false, null);
     }
 
-    // topic
     public SpaceWriter() throws IOException, TimeoutException {
         EXCHANGE_NAME = "space";
         createConnection();
@@ -33,8 +31,6 @@ public class SpaceWriter {
         this.channel = connection.createChannel();
     }
 
-
-    // topic
     public void send(String msg, String k, String type) throws IOException {
         switch(type) {
             case "queue":
@@ -54,7 +50,6 @@ public class SpaceWriter {
             default:
                 System.out.println("Invalid type");
         }
-
     }
 
 }

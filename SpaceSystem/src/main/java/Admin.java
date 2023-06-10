@@ -52,8 +52,6 @@ public class Admin {
             } else {
                 System.out.println("Wrong input format!\nFormat:\trecipient@msg");
             }
-
-
         }
     }
 }
