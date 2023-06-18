@@ -7,7 +7,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
 
-public class ZooWatcher implements Watcher {
+public class ZooKeeperWatcher implements Watcher {
 
     private final DataMonitor dataMonitor;
     @Getter
@@ -15,13 +15,11 @@ public class ZooWatcher implements Watcher {
     @Getter
     private final ZooKeeper zooKeeper;
 
-    public ZooWatcher(String hostPort, String znode, String exec) throws IOException {
+    public ZooKeeperWatcher(String hostPort, String znode, String execPath) throws IOException {
         this.znode = znode;
-        ProgramExecutionController programExecutionController = new ProgramExecutionController(exec);
-        zooKeeper = new ZooKeeper(hostPort, 3000, this);
-        dataMonitor = new DataMonitor(zooKeeper, znode, programExecutionController);
+        zooKeeper = new ZooKeeper(hostPort, 3500, this);
+        dataMonitor = new DataMonitor(zooKeeper, znode, new ProgramExecutor(execPath));
         dataMonitor.startWatch();
-
     }
 
     public void process(WatchedEvent event) {

@@ -7,38 +7,37 @@ import java.util.Scanner;
 
 @Slf4j
 public class Main {
-
-    private static boolean running = true;
+    private static boolean isRunning = true;
     private final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         if (args.length < 3) {
-            log.error("Not enough parameters");
+            log.error("Not enough arguments provided! \nFormat: <host:port> <znode> <exec>");
             System.exit(2);
         }
 
-        String hostPort = args[0];
+        String hostAndPort = args[0];
         String znodeName = args[1];
         String execPath = args[2];
 
-        log.info("HOST: " + hostPort);
-        log.info("ZNODE: " + znodeName);
-        log.info("PATH: " + execPath);
+        log.info("<host:port>: " + hostAndPort);
+        log.info("<znode>: " + znodeName);
+        log.info("<exec>: " + execPath);
 
         try {
-            ZooWatcher executor = new ZooWatcher(hostPort, znodeName, execPath);
-            handleInput(executor);
+            ZooKeeperWatcher executor = new ZooKeeperWatcher(hostAndPort, znodeName, execPath);
+            handleExecutorInput(executor);
         } catch (IOException e) {
-            running = false;
+            isRunning = false;
             e.printStackTrace();
             System.exit(1);
         }
     }
 
-    private static void handleInput(ZooWatcher executor) {
-        while (running) {
+    private static void handleExecutorInput(ZooKeeperWatcher executor) {
+        while (isRunning) {
             scanner.nextLine();
-            TreePrinter.printTree(executor.getZnode(), executor.getZooKeeper());
+            TreeCreator.showTree(executor.getZnode(), executor.getZooKeeper());
         }
     }
 }

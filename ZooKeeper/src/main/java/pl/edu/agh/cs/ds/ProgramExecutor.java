@@ -2,12 +2,12 @@ package pl.edu.agh.cs.ds;
 
 import java.io.IOException;
 
-public class ProgramExecutionController {
+public class ProgramExecutor {
 
     private final String execPath;
     private Process child;
 
-    public ProgramExecutionController(String execPath) {
+    public ProgramExecutor(String execPath) {
         this.execPath = execPath;
     }
 

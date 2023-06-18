@@ -4,32 +4,30 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TreeNode {
+    private final String nodeName;
+    private final List<TreeNode> children;
 
-    final String name;
-    final List<TreeNode> children;
-
-    public TreeNode(String name, List<TreeNode> children) {
-        this.name = name;
+    public TreeNode(String nodeName, List<TreeNode> children) {
+        this.nodeName = nodeName;
         this.children = children;
     }
 
-    public String toString() {
-        StringBuilder buffer = new StringBuilder(50);
-        constructLowerLevel(buffer, "", "");
-        return buffer.toString();
-    }
-
-    private void constructLowerLevel(StringBuilder buffer, String prefix, String childrenPrefix) {
-        buffer.append(prefix);
-        buffer.append(name);
-        buffer.append('\n');
-        for (Iterator<TreeNode> it = children.iterator(); it.hasNext();) {
-            TreeNode next = it.next();
-            if (it.hasNext()) {
-                next.constructLowerLevel(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
+    private void addNextLevel(StringBuilder buffer, String prefix, String childrenPrefix) {
+        buffer.append(prefix).append(nodeName).append('\n');
+        for (Iterator<TreeNode> iterator = children.iterator(); iterator.hasNext();) {
+            TreeNode next = iterator.next();
+            if (iterator.hasNext()) {
+                next.addNextLevel(buffer, childrenPrefix + "├──> ", childrenPrefix + "│   ");
             } else {
-                next.constructLowerLevel(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
+                next.addNextLevel(buffer, childrenPrefix + "└──> ", childrenPrefix + "    ");
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder buffer = new StringBuilder(75);
+        addNextLevel(buffer, "", "");
+        return buffer.toString();
     }
 }
